@@ -3,7 +3,7 @@ package task;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public abstract class Task /*implements Comparable<Task>*/ {
+public abstract class Task implements Comparable<Task> {
 
     private static int counter = 0;
     private final int id;
@@ -46,11 +46,11 @@ public abstract class Task /*implements Comparable<Task>*/ {
     public abstract Repeatability getRepeatabilitiType();
 
     //Сортировка задач по времени
-    /*@Override
+    @Override
     public int compareTo(Task otherTask) {
         if (otherTask == null) {
             return 1;
         }
         return this.taskDateTime.toLocalDate().compareTo(otherTask.taskDateTime.toLocalDate());
-    }*/
+    }
 }
