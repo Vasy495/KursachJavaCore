@@ -21,12 +21,14 @@ public class Main {
         SCHEDULE.addTask(new WeeklyTask("WeeklyTest", "Testiruem", LocalDateTime.now().plusHours(8), TaskType.PERSONAL));
         SCHEDULE.addTask(new YearlyTask("YearlyTest", "Testiruem", LocalDateTime.now().plusHours(10), TaskType.PERSONAL));
 
-        addTask(scanner);
-        System.out.println();
+//        addTask(scanner);
+//        System.out.println();
 //        removeTasks(scanner);
 //        System.out.println();
 //        printTasksForDate(scanner);
 //        System.out.println();
+        startWork(scanner);
+
     }
 
     public static void addTask(Scanner scanner) {
@@ -45,6 +47,7 @@ public class Main {
         };
         SCHEDULE.addTask(task);
         System.out.println("Задача [" + task.getTitle() + "] добавлена в расписание");
+        System.out.println();
     }
 
     private static Repeatability readRepeatability(Scanner scanner) {
@@ -122,6 +125,7 @@ public class Main {
                 int id = Integer.parseInt(idLine);
                 SCHEDULE.removeTask(id);
                 System.out.println("Задача удалена");
+                System.out.println();
                 break;
             } catch (NumberFormatException e) {
                 System.out.println("Введен неверный id задачи");
@@ -142,6 +146,7 @@ public class Main {
                     task.getTaskDateTime().format(TIME_FORMAT),
                     task.getDescription());
         }
+        System.out.println();
     }
 
     private static LocalDate readDate(Scanner scanner) {
@@ -166,6 +171,44 @@ public class Main {
                 System.out.println("Некорректный формат");
             }
         }
+    }
+
+    public static void startWork(Scanner scanner) {
+        int i = 0;
+        while (i == 0) {
+            try {
+            System.out.println("Выберите интесеующий пукт: ");
+            System.out.println("1. Добавить задачу");
+            System.out.println("2. Получить задачи на день");
+            System.out.println("3. Удалить задачу");
+            System.out.println("4. Выход из программы");
+            String idChoice = scanner.nextLine();
+            int id = Integer.parseInt(idChoice);
+            switch (id) {
+                case 1:
+                    System.out.println("Выбран пункт [Добавить задачу]");
+                    addTask(scanner);
+                    break;
+                case 2:
+                    System.out.println("Выбран пункт [Получить задачи на день]");
+                    printTasksForDate(scanner);
+                    break;
+                case 3:
+                    System.out.println("Выбран пункт [Удалить задачу]");
+                    removeTasks(scanner);
+                    break;
+                case 4:
+                    System.out.println("Выбран пункт [Выйти из программы]. Досвидания!");
+                    i += 1;
+                    break;
+                default:
+                    System.out.println("Введен неверный id задачи, поробуйте еще раз!");
+            }
+            } catch (NumberFormatException e) {
+                System.out.println("Введен неверный id задачи, попробуйте еще раз!");
+            }
+        }
+
     }
 
     private static String localizeType(TaskType taskType) {
